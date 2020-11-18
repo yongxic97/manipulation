@@ -20,13 +20,13 @@ ycb = [
 
 
 def AddIiwa(plant, collision_model="no_collision"):
-    sdf_path = pydrake.common.FindResourceOrThrow(
-        "drake/manipulation/models/iiwa_description/iiwa7/"
-        f"iiwa7_{collision_model}.sdf")
+    filename = pydrake.common.FindResourceOrThrow(
+        "drake/manipulation/models/iiwa_description/urdf/"
+        f"iiwa14_{collision_model}.urdf")
 
     parser = pydrake.multibody.parsing.Parser(plant)
-    iiwa = parser.AddModelFromFile(sdf_path)
-    plant.WeldFrames(plant.world_frame(), plant.GetFrameByName("iiwa_link_0"))
+    iiwa = parser.AddModelFromFile(filename)
+    plant.WeldFrames(plant.world_frame(), plant.GetFrameByName("base"))
 
     # Set default positions:
     q0 = [0.0, 0.1, 0, -1.2, 0, 1.6, 0]
